@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load category_tags %}
+
+{% block navigation %}
+    {% include "partials/nav_primary.html" with expand_dropdown=1 %}
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block column_left %}
+{% endblock %}
+
+{% block content %}
+<h1>Categories</h1>
+ {% category_tree depth=2 as tree_categories %}
+ {% if tree_categories %}
+ <div class="row">
+ {% for tree_category, info in tree_categories %}
+   <div class="col-sm-3">
+   	<a href="{{ tree_category.get_absolute_url }}"><img class="cat-img" src="{{ tree_category.image.url }}"></a>
+   	<a href="{{ tree_category.get_absolute_url }}">{{ tree_category.name }}</a>
+   </div>          
+  {% endfor %}
+                              
+	{% endif %}
+{% endblock content %}
