@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% load category_tags %}
+{% load slideshow_tags %}
+{% load product_tags %}
+{% load product_view_tags %}
 
 {% block navigation %}
     {% include "partials/nav_primary.html" with expand_dropdown=1 %}
@@ -12,6 +15,34 @@
 {% endblock %}
 
 {% block content %}
+<script>
+$(document).ready(function() {
+
+  $("#main-slider").owlCarousel({
+	navigation: true, // Show next and prev buttons
+	slideSpeed: 300,
+	paginationSpeed: 400,
+	autoPlay: true,
+	stopOnHover: true,
+	singleItem: true,
+	afterInit: ''
+    });
+ });
+</script>
+<div class="container slider">
+    <div class="col-md-12">
+    	{% image_list as images %}
+        <div id="main-slider">
+            {% for image in images %}
+                <div class="item">
+                    <a href="{{ image.url }}"><img src="{{image.image.url}}" alt="something" class="img-responsive"></a>
+                </div>
+            {% endfor %}
+        </div>
+                    <!-- /#main-slider -->
+    </div>
+ </div>
+ <div class="container">
 <h1>Categories</h1>
  {% category_tree depth=2 as tree_categories %}
  {% if tree_categories %}
@@ -21,7 +52,38 @@
    	<a href="{{ tree_category.get_absolute_url }}"><img class="cat-img" src="{{ tree_category.image.url }}"></a>
    	<a href="{{ tree_category.get_absolute_url }}">{{ tree_category.name }}</a>
    </div>          
-  {% endfor %}
-                              
+  {% endfor %}                        
 	{% endif %}
+  </div>
+  </div>
+  <div>
+    {% with products_sliced=products|slice:":4" %}
+    {% if products_sliced %}
+        <div class="sub-header">
+            <h2>{% trans 'Products you recently viewed' %}</h2>
+        </div>
+
+        <ul class="row">
+            {% for product in products_sliced %}
+                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">{% render_product product %}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+  </div>
+  <div class="container">
+  <h1>Popular Products</h1>
+ {% product_record as product_list %}
+ <div class="row">
+ {% for product in product_list %}
+   <div class="col-sm-3">
+   {% with product.product.images.all|first as image %}
+    <a href="{{ product.product.get_absolute_url }}"><img class="cat-img" src="{{ image.original.url }}"></a>
+    <a href="{{ product.product.get_absolute_url }}">{{ product.product.title }}</a>
+    {% endwith %}
+   </div>          
+  {% endfor %}
+  </div>
+  </div>
+
 {% endblock content %}

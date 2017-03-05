@@ -1,3 +1,23 @@
+.slider{
+  padding-top: 0px !important;
+}
+
+.basket-mini{
+  padding-top: 18px !important;
+}
+.btn-cart{
+  background-color: #FEEA3A;
+}
+footer{
+  width: 100% !important;
+  margin: 0px !important;
+}
+.header{
+  padding: 0px;
+}
+header{
+  width: 100% !important;
+}
 a,
 button {
   -webkit-transition: all 0.2s ease-out;
@@ -20,8 +40,9 @@ h1 {
 }
 #top {
   background: #00BBD3;
-  padding: 10px 0;
-  height: 100px;
+  padding: 10px 0 !important;
+  height: 100px !important;
+  padding-right: 0px;
 }
 #top .offer {
   color: black;
@@ -126,7 +147,7 @@ h1 {
   text-align: right;
 }
 .navbar #search .navbar-form {
-  float: right;
+  float: right !important;
   width: 500px;
 }
 .navbar #search .navbar-form .input-group {
@@ -149,7 +170,9 @@ h1 {
   padding: 0;
 }
 .pro{
-  padding-left: 70px !important;
+  padding-left:10px; 
+  background-color: #00BBD3;
+  color: black !important;
 }
 .pro-pic{
   width: 25px;
@@ -1121,7 +1144,7 @@ h1 {
     overflow-y: visible;
   }
   .navbar-collapse.right {
-    float: right;
+    float: right !important;
   }
   .navbar-fixed-top .navbar-collapse,
   .navbar-static-top .navbar-collapse,

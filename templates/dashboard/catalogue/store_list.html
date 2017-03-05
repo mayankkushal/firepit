@@ -1,0 +1,38 @@
+{% extends 'dashboard/layout.html' %}
+{% load category_tags %}
+{% load i18n %}
+{% load render_table from django_tables2 %}
+
+{% block body_class %}{{ block.super }} catalogue{% endblock %}
+
+{% block title %}
+    {% trans "Categories" %} | {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+        </li>
+        <li class="active">{% trans "Stores" %}</li>
+    </ul>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <a href="{% url 'dashboards:store_add' %}" class="btn btn-primary btn-lg pull-right"><i class="icon-plus"></i> {% trans "Create new store" %}</a>
+        <h1>{% trans "Stores" %}</h1>
+    </div>
+{% endblock header %}
+
+{% block dashboard_content %}
+    <div class="alert alert-info">
+        <p>{% trans "You are editing:" %}
+            <strong><a href="">{% trans "Home" %}</a></strong>
+        </p>
+    </div>
+
+
+     {% render_table store %}
+
+{% endblock dashboard_content %}

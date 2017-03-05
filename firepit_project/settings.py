@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'firepit',
     'compressor',
     'widget_tweaks',
-] + get_core_apps()
+] + get_core_apps( ['apps.catalogue', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue'])
+
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -134,6 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 AUTHENTICATION_BACKENDS = (
     'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
@@ -178,9 +181,12 @@ OSCAR_ORDER_STATUS_PIPELINE = {
     'Being processed': ('Processed', 'Cancelled',),
     'Cancelled': (),
 }
-OSCAR_DEFAULT_CURRENCY = 'INR'
+
 OSCAR_CURRENCY_LOCALE = 'en_US'
-OSCAR_CURRENCY_FORMAT = 'INR #,###.##'
+OSCAR_DEFAULT_CURRENCY = u'INR' 
+OSCAR_CURRENCY_FORMAT = u'₹ #,##0' 
+
+OSCAR_SEND_REGISTRATION_EMAIL = False
 
 OSCAR_SHOP_NAME = 'FIREPIT'
 OSCAR_SHOP_TAGLINE = 'You Think, We Provide'
@@ -191,13 +197,13 @@ OSCAR_ALLOW_ANON_CHECKOUT = True
 
 OSCAR_DASHBOARD_NAVIGATION += [
     {
-        'label': _('Site Manager'),
+        'label': _('Store Manager'),
         'children': [
             {
-                'label': _('Banner'),
-                'url_name': 'your-reverse-url-lookup-name',
-            },
-         ]
+                'label': _('Stores'),
+                'url_name': 'dashboard:store_list',
+            }
+         ],
     },
 ]
 

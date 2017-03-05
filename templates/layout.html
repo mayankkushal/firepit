@@ -5,11 +5,6 @@
 {% load i18n %}
 
 {% block styles %}
-    {% comment %}
-        If you are developing Oscar's CSS, or overriding Oscar's CSS
-        files in your project, then set USE_LESS = True in your
-        settings file. This will enable the on-the-fly less compiler.
-    {% endcomment %}
     {% if use_less %}
         <link rel="stylesheet/less" type="text/css" href="{% static "oscar/less/styles.less" %}" />
     {% else %}
@@ -18,16 +13,22 @@
     <link rel="stylesheet" href="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "oscar/css/datetimepicker.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'css/owl.theme.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block layout %}
     {# Top-horizontal bar with account, notifictions, dashboard links #}
     {# Site logo/title, mini-basket, browse dropdown and searchbox #}
-    <header class="header container-fluid">
         <div id="top">
         <div class="container">
-            <div class="col-md-6 offer" data-animate="fadeInDown">
+            <div class="col-md-4 offer" data-animate="fadeInDown">
                 <a href="{% url 'offer:list' %}" class="btn btn-success btn-sm">Offer of the day</a>  <a href="{% url 'offer:list' %}">Get flat 35% off on orders</a>
+            </div>
+            <div class="col-md-2">
+                <a class="pro" href="{% url 'customer:summary' %}">Hi, {{ request.user.first_name }}</a>
             </div>
             <div class="col-md-6">
                 <ul class="menu">
@@ -48,6 +49,7 @@
                 </ul>
             </div>
         </div>
+        </div>
         <div class="navbar navbar-default fire navfix" role="navigation" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -63,20 +65,17 @@
                     </button>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#search">
                         <span class="sr-only">Toggle search</span>
-                        Search
+                        <i class="icon-search"></i>
                     </button>
-                    <a class="btn btn-default navbar-toggle" href="basket.html">
-                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                    <a class="btn btn-default navbar-toggle" href="{% url 'basket:summary' %}">
+                        <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Cart</span>
                     </a>
                 </div>
             </div>
             <!--/.navbar-header -->
 
             <div class="navbar-collapse collapse" id="navigation">
-                <ul class="nav navbar-nav navbar-right pro">
-                    <li><a href=""><img src="https://res.cloudinary.com/dvqjn4lzj/image/upload/v1487923099/{{ request.user.profile.picture.name }}" class="pro-pic">Hi, {{ request.user.profile.first_name }}</a></li>
-                </ul>
-
+                
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="index.html">Today's Deals</a>
                     </li>
@@ -240,7 +239,7 @@
                 <div class="navbar-collapse collapse right" id="search-not-mobile">
                     <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
                         <span class="sr-only">Toggle search</span>
-                        Search
+                        <i class="icon-search"></i> Search
                     </button>
                 </div>
 
@@ -253,7 +252,7 @@
                         {{ search_form.q }}
                         <span class="input-group-btn">
 
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
 
             </span>
                     </div>
@@ -270,11 +269,11 @@
 
     </div>
 
-    </header>
+
 
     {# Main content of page - other layout templates may override this block #}
     {% block content_wrapper %}
-        <div class="container-fluid page">
+        <div class="page">
 
             <div class="page_inner">
                 {% block breadcrumbs %}{% endblock %}
@@ -311,11 +310,14 @@
     {# Load the on-the-fly less compiler. Never do this in production. #}
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
   {% endif %}
+
 {% endblock %}
 
 {# Local scripts #}
 {% block scripts %}
     {{ block.super }}
+
+
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="{% static "oscar/js/bootstrap3/bootstrap.min.js" %}"></script>
     <!-- Oscar -->
@@ -323,6 +325,9 @@
 
     <script src="{% static "oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js" %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static "oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/firepit.js' %}"></script>
 {% endblock %}
 
 {% block extrascripts %}
