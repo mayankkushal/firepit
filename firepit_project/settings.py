@@ -14,6 +14,9 @@ import os
 from oscar.defaults import *
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
     'firepit',
     'compressor',
     'widget_tweaks',
+    'cloudinary',
 ] + get_core_apps( ['apps.catalogue', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue'])
 
 
@@ -168,6 +172,13 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
 
+# Cloudinary config
+# Cloudinary config
+cloudinary.config( 
+  cloud_name = "dvqjn4lzj", 
+  api_key = "124346914869879", 
+  api_secret = "5NZeAMeGO1QDowm8o8NperSewhE" 
+)
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -206,6 +217,15 @@ OSCAR_DASHBOARD_NAVIGATION += [
          ],
     },
 ]
+# Image folder destination
+from datetime import date
+today = date.today()
+today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
+path = 'images/products/'
+OSCAR_IMAGE_FOLDER = os.path.join(path, today_path)
+
+
+
 
 #for deploying 
 import dj_database_url

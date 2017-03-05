@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from oscar.apps.catalogue.models import Category
 from .models import SlideShowImage, Banner
 
 # Create your views here.

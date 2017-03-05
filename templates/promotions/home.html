@@ -78,7 +78,7 @@ $(document).ready(function() {
  {% for product in product_list %}
    <div class="col-sm-3">
    {% with product.product.images.all|first as image %}
-    <a href="{{ product.product.get_absolute_url }}"><img class="cat-img" src="{{ image.original.url }}"></a>
+    <a href="{{ product.product.get_absolute_url }}"><img class="cat-img" src="http://res.cloudinary.com/dvqjn4lzj/image/upload/v1487920162/{{ image.original.name }}"></a>
     <a href="{{ product.product.get_absolute_url }}">{{ product.product.title }}</a>
     {% endwith %}
    </div>          
