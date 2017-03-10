@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'compressor',
     'widget_tweaks',
     'cloudinary',
-] + get_core_apps( ['apps.catalogue', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue'])
+    'social_django',
+    'blog',
+] + get_core_apps( ['apps.catalogue', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue', 'apps.checkout'])
 
 
 SITE_ID = 1
@@ -85,6 +87,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.promotions.context_processors.promotions',
                 'oscar.apps.checkout.context_processors.checkout',
@@ -102,7 +107,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'firepit_project.wsgi.application'
 
 
-
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -144,7 +149,10 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = (
     'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.twitter.TwitterOAuth',
 )
+
+SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -204,7 +212,7 @@ OSCAR_SHOP_TAGLINE = 'You Think, We Provide'
 
 # allow anonymous
 OSCAR_ALLOW_ANON_REVIEWS = False
-OSCAR_ALLOW_ANON_CHECKOUT = True
+OSCAR_ALLOW_ANON_CHECKOUT = False
 
 OSCAR_DASHBOARD_NAVIGATION += [
     {

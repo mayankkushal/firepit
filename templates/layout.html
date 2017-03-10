@@ -42,10 +42,6 @@
                     {% if user.is_staff or perms.partner.dashboard_access %}
                     <li><a href="{% url 'dashboard:index' %}"><i class="icon-list-ul"></i> {% trans "Dashboard" %}</a></li>
                     {% endif %}
-                    <li><a href="contact.html">Contact</a>
-                    </li>
-                    <li><a href="#">Recently viewed</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -77,155 +73,11 @@
             <div class="navbar-collapse collapse" id="navigation">
                 
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="index.html">Today's Deals</a>
+                    <li><a href="{% url 'request_quote' %}">Request a Quote</a>
                     </li>
-                    <li class="dropdown fire-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Most Popular<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="fire-content">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                          <h5>Store 1</h5>
-                                            <ul>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Store 2</h5>
-                                            <ul>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Store 3</h5>
-                                            <ul>
-                                                 <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="" class="img img-responsive" alt="some product image">
-                                                </a>
-                                            </div>
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="" class="img img-responsive" alt="some porduct image">
-                                                </a>
-                                            </div>
-                                    </div>
-                                </div>
-                                <!-- /.fire-content -->
-                            </li>
-                        </ul>
+                    <li><a href="{% url 'decorate_space' %}">Decorate your Space</a>
                     </li>
-
-                    <li class="dropdown fire-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Latest<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="fire-content">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h5>Store 1</h5>
-                                            <ul>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Store 2</h5>
-                                            <ul>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <h5>Store 3</h5>
-                                            <ul>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                                <li><a href="category.html">Sofa</a>
-                                                </li>
-                                                <li><a href="category.html">Chair</a>
-                                                </li>
-                                                <li><a href="category.html">Bed</a>
-                                                </li>
-                                                <li><a href="category.html">Couch</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="" class="img img-responsive" alt="some product image">
-                                                </a>
-                                            </div>
-                                            <div class="banner">
-                                                <a href="#">
-                                                    <img src="" class="img img-responsive" alt="some porduct image">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.fire-content -->
-                            </li>
-                        </ul>
-                    </li>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
+                    
             </div>
             <!--/.nav-collapse -->
 

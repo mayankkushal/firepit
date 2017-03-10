@@ -11,3 +11,18 @@ $(window).scroll(function () {
     }
   });
 
+$(function(){
+	var image_count = 1;
+	$('#add-image').click(function(){
+		var id = '#id_form-'+image_count+'-image';
+		$(id).removeClass('hidden');
+		image_count += 1;
+	});
+	$('#remove-image').click(function(){
+		var id = '#id_form-'+(image_count-1)+'-image';
+		$(id).val('');
+		$(id).addClass('hidden');
+		image_count -= 1;
+	});
+});
+

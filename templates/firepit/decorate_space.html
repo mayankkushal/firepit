@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<div class="container space-form">
+<h1>DECORATE YOUR SPACE</h1>
+<p> We handle Interior decoration of small homes and offices. Please provide your details and upload few pictures of the rooms you are planning to decorate. We will schedule a visit to your office and give you the best quote in the market.</p>
+<form id="post_form" method="post" action=""
+      enctype="multipart/form-data">
+      <div class="form-group">
+    {% csrf_token %}
+    {% for hidden in space_form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+
+        <input id="id_name" class="form-control" maxlength="156" name="name" type="text" required autofocus placeholder="Name" /> <br />
+    
+        <input id="id_email" class="form-control" maxlength="256" name="email" type="email" required placeholder="Email" /> <br />
+        <input id="id_address" class="form-control" maxlength="500" name="address" type="text" required placeholder="Address" /> <br />
+    
+        <input id="id_phone_number" class="form-control" maxlength="12" name="phone_number" type="text" required placeholder="Phone Number" /> <br />
+    
+        <textarea cols="40" id="id_message" class="form-control" maxlength="1256" name="message" rows="10" required placeholder="Your Messsage"></textarea> <br />
+    
+
+    <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="5" /><input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="0" /><input id="id_form-MIN_NUM_FORMS" name="form-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000" />
+    
+        <tr><th></th><td><input id="id_form-0-image"  class="form-control" name="form-0-image" type="file" /><input id="id_form-0-id" class="form-control" name="form-0-id" type="hidden" /></td></tr>
+        <tr><th></th><td><input id="id_form-1-image" class="form-control hidden" name="form-1-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
+        <tr><th></th><td><input id="id_form-2-image" class="form-control hidden" name="form-2-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
+        <tr><th></th><td><input id="id_form-3-image" class="form-control hidden" name="form-3-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
+        <tr><th></th><td><input id="id_form-4-image" class="form-control hidden" name="form-4-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
+        <a class="btn btn-xs" id="add-image">Add image</a>  <a class="btn btn-xs" id="remove-image">Remove image</a>
+    <br>
+    <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-info" />
+    </div>
+</form>
+</div>
+
+{% endblock %}

@@ -12,11 +12,12 @@ class Store(models.Model):
 	description = models.TextField(_('Description'), blank=True)
 	image = models.ImageField(_('Image'), upload_to='stores', blank=True, null=True, max_length=255)
 	slug = models.SlugField(_('Slug'), max_length=255, db_index=True)
+	views = models.PositiveIntegerField(_('Views'))
 
 	def save(self, *args, **kwargs):
 		if not self.id:
 			self.slug = slugify(self.name)
-		cloudinary.uploader.upload( self.image, folder='store', public_id=os.path.splitext(self.image.name)[0])
+		cloudinary.uploader.upload( self.image, folder='stores', public_id=os.path.splitext(self.image.name)[0])
 		super(Store, self).save(*args, **kwargs)
 
 	def __str__(self):

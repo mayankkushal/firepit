@@ -1,4 +1,7 @@
 {% load i18n %}
+{% load flatpages %}
+{% get_flatpages as flatpages %}
+
 <footer class="footer">
     {% block footer %}
         {% comment %}
@@ -15,14 +18,11 @@
                         <h4>Pages</h4>
 
                         <ul>
-                            <li><a href="text.html">About us</a>
+                        {% for page in flatpages %}
+                            <li><a href="{{ page.url }}">{{ page.title }}</a>
                             </li>
-                            <li><a href="text.html">Terms and conditions</a>
-                            </li>
-                            <li><a href="faq.html">FAQ</a>
-                            </li>
-                            <li><a href="contact.html">Contact us</a>
-                            </li>
+                        {% endfor %}
+                        <!--Other pages can be added in content section of dashboard, it will automatically be added here-->
                         </ul>
 
                         <hr>
@@ -41,30 +41,7 @@
 
                     <div class="col-md-3 col-sm-6">
 
-                        <h4>Top categories</h4>
-
-                        <h5>Men</h5>
-
-                        <ul>
-                            <li><a href="category.html">T-shirts</a>
-                            </li>
-                            <li><a href="category.html">Shirts</a>
-                            </li>
-                            <li><a href="category.html">Accessories</a>
-                            </li>
-                        </ul>
-
-                        <h5>Ladies</h5>
-                        <ul>
-                            <li><a href="category.html">T-shirts</a>
-                            </li>
-                            <li><a href="category.html">Skirts</a>
-                            </li>
-                            <li><a href="category.html">Pants</a>
-                            </li>
-                            <li><a href="category.html">Accessories</a>
-                            </li>
-                        </ul>
+                        
 
                         <hr class="hidden-md hidden-lg">
 
@@ -144,7 +121,7 @@
         <div id="copyright">
             <div class="container">
                 <div class="col-md-12">
-                    <p class="pull-left">© 2017 Firepit</p>
+                    <p class="pull-left">Exotic Furniture at Affordable prices © 2017</p>
 
                 </div>
             </div>

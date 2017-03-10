@@ -8,6 +8,7 @@
 {% load display_tags %}
 {% load i18n %}
 {% load purchase_info_tags %}
+{% load review_control_tags %}
 
 {% block title %}
     {{ product.title }} | {{ block.super }}
@@ -72,9 +73,12 @@
                 {% include "catalogue/partials/stock_record.html" with verbose=1 %}
             {% endblock %}
 
+            {% is_review_allowed as allowed %}
+            {% if allowed %}
             {% iffeature "reviews" %}
                 {% include "catalogue/reviews/partials/review_stars.html" %}
             {% endiffeature %}
+            {% endif %}
 
             <hr/>
 
@@ -155,12 +159,15 @@
             {% if product.num_approved_reviews == 0 %}
                 <p>
                     {% if product|is_review_permitted:user %}
+                    {% is_review_allowed as allowed %}
+                        {% if allowed %}
                         {% url 'catalogue:reviews-add' product_slug=product.slug product_pk=product.id as add_review_url %}
                             {% blocktrans %}This product does not have any reviews yet -
                             <a href="{{ add_review_url }}#addreview">be the first to write one</a>.
                         {% endblocktrans %}
                     {% else %}
                         {% trans "This product does not have any reviews yet" %}.
+                    {% endif %}
                     {% endif %}
                 </p>
             {% else %}
