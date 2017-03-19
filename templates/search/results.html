@@ -36,7 +36,7 @@
 
 {% block headertext %}
     {% blocktrans with q=query %}
-        Products matching "{{ q }}"
+        Looking for "{{ q }}"
     {% endblocktrans %}
 {% endblock %}
 
@@ -76,19 +76,27 @@
             </p>
         {% endif %}
     </form>
-
     {% if page.object_list %}
         <section>
             <div>
                 <ol class="row">
                     {% for result in page.object_list %}
+                    {% if result.object.name %} <!-- very ugly hack, checks if the object has name(only store has name) -->
+                           <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                                <a href="{% url 'store' result.object.slug %}""><img src="http://res.cloudinary.com/dvqjn4lzj/image/upload/v1487920162/{{ result.object.image.name }}" alt="{{ result.object.name }}"></a>
+                                <a href="{% url 'store' result.object.slug %}"">{{ result.object.name }}</a>
+                                <p>{{ result.object.description }}</p>
+                            </li>
+                    {% else %}   
                         <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">{% render_product result.object %}</li>
+                    {% endif %}
                     {% endfor %}
                 </ol>
                 {% include "partials/pagination.html" with page_obj=page %}
             </div>
         </section>
     {% endif %}
+
 
 {% endblock %}
 

@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'social_django',
     'blog',
-] + get_core_apps( ['apps.catalogue', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue', 'apps.checkout'])
+] + get_core_apps( ['apps.catalogue','apps.basket', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue', 
+                    'apps.checkout', 'apps.search'])
 
 
 SITE_ID = 1

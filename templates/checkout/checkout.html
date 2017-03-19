@@ -3,6 +3,7 @@
 {% load thumbnail %}
 {% load i18n %}
 {% load purchase_info_tags %}
+{% load coupon_form_tag %}
 {% load staticfiles %}
 
 {% block title %}
@@ -86,7 +87,7 @@
     {% block order_contents %}
         <div class="sub-header">
             {% block order_contents_actions %}
-                <a href="{% url 'basket:summary' %}" class="pull-right">
+                <a href="{% url 'basket:summary' %}" class="pull-right btn btn-sm btn-primary">
                     {% trans "Edit order contents" %}
                 </a>
             {% endblock %}
@@ -134,7 +135,21 @@
         {% endfor %}
 
         <div class="row">
-            <div class="col-sm-6">&nbsp;</div>
+
+            <div class="col-sm-6">
+                    <div class="sub-header">
+                        <h2>{% trans "Voucher/promo code" %}</h2>
+                    </div>
+                    <div id="voucher_form_container">
+                        <form id="voucher_form" action="{% url 'basket:vouchers-add' %}" method="post">
+                            {% csrf_token %}
+                            {% voucher_form_from_tag as voucher_form %}
+                            {% include "partials/form_fields.html" with form=voucher_form %}
+                            <button type="submit" class="btn btn-info" data-loading-text="{% trans 'Adding...' %}">{% trans "Add voucher" %}</button>
+                            {% trans "or" %} <a href="#" id="voucher_form_cancel">{% trans "cancel" %}</a>
+                        </form>
+                    </div>
+                </div>
             <div class="col-sm-6">
                 <div class="sub-header">
                     <h2>{% trans 'Totals' %}</h2>

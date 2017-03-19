@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="container space-form">
+<div class="container quote-form">
 <h1>DECORATE YOUR SPACE</h1>
 <p> We handle Interior decoration of small homes and offices. Please provide your details and upload few pictures of the rooms you are planning to decorate. We will schedule a visit to your office and give you the best quote in the market.</p>
 <form id="post_form" method="post" action=""
@@ -30,8 +30,9 @@
         <tr><th></th><td><input id="id_form-2-image" class="form-control hidden" name="form-2-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
         <tr><th></th><td><input id="id_form-3-image" class="form-control hidden" name="form-3-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
         <tr><th></th><td><input id="id_form-4-image" class="form-control hidden" name="form-4-image" type="file" /><input id="id_form-1-id" name="form-1-id" type="hidden" /></td></tr>
-        <a class="btn btn-xs" id="add-image">Add image</a>  <a class="btn btn-xs" id="remove-image">Remove image</a>
-    <br>
+        <hr>
+        <a class="btn btn-sm btn-success" id="add-image">add image</a>  <a class="btn btn-sm btn-danger" id="remove-image">remove image</a>
+    <hr>
     <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-info" />
     </div>
 </form>

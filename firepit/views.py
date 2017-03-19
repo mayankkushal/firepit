@@ -10,8 +10,11 @@ from django.template import RequestContext, Context
 
 
 OrderPlacementMixin = get_class('checkout.mixins', 'OrderPlacementMixin')
-Basket = get_model('basket', 'Basket')
+Basket = get_model('basket', 'basket')
+Order = get_model('order', 'Order')
 CheckoutSessionData = get_class('checkout.utils', 'CheckoutSessionData')
+BasketMiddleware = get_class('basket.middleware', 'BasketMiddleware')
+Selector = get_class('partner.strategy', 'Selector')
 
 # Create your views here.
 
@@ -55,15 +58,32 @@ def request_quote(request):
 	else:
 		quote_form = RequestQuoteForm()
 		formset = ImageFormSet(queryset=RequestQuoteImage.objects.none())
-	basket = Basket.objects.get(pk=request.session['basket'])
-	print(basket)
 	return render(request, 'firepit/request_quote.html',{'quote_form':quote_form, 'formset':formset})
 
 def thank_you(request):
 	
 	order_number = request.session['order_number']
-	order = Order.objects.get(number=order_number)                 
-	return render(request, 'checkout/thank_you.html', {'order':order})
+	BasketMiddleware().process_request(request)
+	basket = Basket.objects.get(pk=request.session['basket'])
+	shipping_address = request.session['shipping_address']
+	shipping_method = request.session['shipping_method']
+	shipping_charge = request.session['shipping_charge']
+	order_total = request.session['order_total']
+	user = request.user
+	CheckoutSessionData(request).set_order_number(order_number)
+	OrderPlacementMixin().freeze_basket(basket)
+	CheckoutSessionData(request).set_submitted_basket(basket)
+	basket.strategy = Selector().strategy(request, user=request.user)
+	print(basket.strategy)
+	try:
+		OrderPlacementMixin().place_order(order_number=order_number, user=user, basket=basket, shipping_address=shipping_address,
+                    shipping_method=shipping_method, shipping_charge=shipping_charge, order_total=order_total,
+                    )  
+	except ValueError:
+		pass
+	order = Order.objects.get(number=order_number)
+	              
+	return render(request, 'thank_you.html', {"order":order})
 
 def decorate_space(request):
 	ImageFormSet = modelformset_factory(DecorateSpaceImage, form=DecorateSpaceImageForm, extra=5)#extra can be increased for more no 

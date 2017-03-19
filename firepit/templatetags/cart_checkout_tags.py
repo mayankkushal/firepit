@@ -16,16 +16,7 @@ OrderCreator = get_class('order.utils', 'OrderCreator')
 api = Instamojo(api_key='e592148daf8eae546e01e6b2f18ad1fb',
                 auth_token='9e09a975978993c860602dcef3ec76f3')
 
-register = template.Library()
-
-def order_set(request, basket):
-	order_number = OrderNumberGenerator().order_number(basket)
-	CheckoutSessionData(request).set_order_number(order_number)
-	OrderPlacementMixin().freeze_basket(basket)
-	CheckoutSessionData(request).set_submitted_basket(basket)
-	
-
-
+register = template.Library() 
 
 @register.simple_tag(takes_context=True)
 def checkout_url(context):
@@ -41,10 +32,11 @@ def checkout_url(context):
 	request.session['shipping_charge'] = shipping_charge
 	request.session['basket'] = basket.pk
 	request.session['order_total'] = order_total
-	print(context['billing_address'])
+	
 	user = request.user
 	order_number = OrderNumberGenerator().order_number(basket)
 	request.session['order_number'] = order_number
+	print(order_number)
 	phone = shipping_address.phone_number.as_national
 	response = api.payment_request_create(
 			amount=order_total.incl_tax,
@@ -56,13 +48,6 @@ def checkout_url(context):
 			phone= phone
 		)
 	url = response['payment_request']['longurl']
-	order_set(request,basket)
-	# below code should be moved to firepit.views.thank_you 
-	# currently the code is misbehaving there
-	# oders must be verified manualy as of now
-	OrderPlacementMixin().place_order(order_number, user, basket, shipping_address,
-                    shipping_method, shipping_charge, order_total,
-                    )
 	return url
 
 

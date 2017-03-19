@@ -29,7 +29,6 @@
                 <tbody>
                     <tr>
                         <th colspan="2">{% trans 'Product' %}</th>
-                        <th>{% trans 'Quantity' %}</th>
                         <th>{% trans 'Action' %}</th>
                     </tr>
 
@@ -53,16 +52,6 @@
                                     {% else %}
                                         <em>{{ line.get_title }} ({% trans 'Not available anymore' %})</em>
                                     {% endif %}
-                                </td>
-                                <td>
-                                    {% for field in subform %}
-                                        {% render_field field class+="form-control" %}
-                                        {% for error in field.errors %}
-                                            <ul class="error-block">
-                                                <li>{{ error }}</li>
-                                            </ul>
-                                        {% endfor %}
-                                    {% endfor %}
                                 </td>
                                 <td>
                                     <div class="btn-group">

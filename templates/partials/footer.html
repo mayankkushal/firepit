@@ -30,8 +30,13 @@
                         <h4>User section</h4>
 
                         <ul>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'customer:logout' %}">Logout</a>
+                            </li>
+                        {% else %}
                             <li><a href="{% url 'customer:login' %}">Login or Register</a>
                             </li>
+                        {% endif %}
                         </ul>
 
                         <hr class="hidden-md hidden-lg hidden-sm">

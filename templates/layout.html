@@ -69,7 +69,7 @@
                 </div>
             </div>
             <!--/.navbar-header -->
-
+ 
             <div class="navbar-collapse collapse" id="navigation">
                 
                 <ul class="nav navbar-nav navbar-left">
@@ -89,7 +89,7 @@
                 <!--/.nav-collapse -->
 
                 <div class="navbar-collapse collapse right" id="search-not-mobile">
-                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search" id="search-btn">
                         <span class="sr-only">Toggle search</span>
                         <i class="icon-search"></i> Search
                     </button>
@@ -101,8 +101,8 @@
 
                 <form class="navbar-form" role="search" action="{% url 'search:search' %}">
                     <div class="input-group">
-                        {{ search_form.q }}
-                        <span class="input-group-btn">
+                    <input class="form-control" id="id_q" name="q" placeholder="Search" tabindex="1" type="search" autofocus>
+                    <span class="input-group-btn">
 
             <button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
 
