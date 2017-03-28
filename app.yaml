@@ -1,0 +1,20 @@
+application: firepit
+version: 1
+runtime: python35
+api_version: 1
+threadsafe: true
+
+handlers:
+
+- url: /.*
+  script: main.application
+
+  
+libraries:
+
+- name: django
+  version: "1.10.5"
+  
+  
+env_variables:
+  DJANGO_SETTINGS_MODULE: 'firepit_project.settings'
