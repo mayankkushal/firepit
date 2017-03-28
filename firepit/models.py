@@ -107,10 +107,14 @@ class PowerSolutions(models.Model):
 	phone_number = models.CharField(max_length=12)
 	address = models.CharField(max_length=500)
 	message = models.TextField(max_length=1256, null=True, blank=True)
-	small_light = models.PositiveIntegerField(null=True)
-	big_light = models.PositiveIntegerField(null=True)
-	fan = models.PositiveIntegerField(null=True)
-	desktop = models.PositiveIntegerField(null=True)
+	SMALL_CHOICES = (('0','0'), ('1-3','1-3'), ('4-6', '4-6'), ('7-9', '7-9'), ('>10', '>10'))
+	small_light = models.CharField(null=True, default='0', max_length=5, choices=SMALL_CHOICES)
+	big_light = models.CharField(null=True, default='0', max_length=5, choices=SMALL_CHOICES)
+	fan = models.CharField(null=True, default='0', max_length=5, choices=SMALL_CHOICES)
+	BIG_CHOICES = (('0','0'), ('1', '1'), ('2','2'), ('3','3'), ('4','4'), ('5','5'), ('>5','>5'))
+	desktop = models.CharField(null=True, default='0', max_length=5, choices=BIG_CHOICES)
+	HOURS_CHOICES = (('3', '3'), ('6','6'), ('9','9'), ('12','12'))
+	hours = models.CharField(default='0', max_length=5, choices=HOURS_CHOICES)
 
 	def __str__(self):
 		return self.name

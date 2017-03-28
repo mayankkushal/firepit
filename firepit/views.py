@@ -120,9 +120,7 @@ def power_solution(request):
 		sol_form = PowerSolutionForm(request.POST)
 		if sol_form.is_valid():
 			sol = sol_form.save()
-			total = sol.power_total()
-			category = sol.invertor_category(total)
-			return render(request, 'firepit/success.html', {'total':total, 'category':category})
+			return render(request, 'firepit/success.html')
 	else:
 		sol_form = PowerSolutionForm()
 		return render(request, 'firepit/power_solution.html', {'sol_form':sol_form}) 
