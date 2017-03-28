@@ -17,6 +17,7 @@ from oscar import get_core_apps
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from django.contrib.admin import AdminSite
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,6 +56,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'social_django',
     'blog',
+    'django_extensions',
+    'newsletter',
 ] + get_core_apps( ['apps.catalogue','apps.basket', 'apps.address', 'apps.dashboard', 'apps.dashboard.catalogue', 
                     'apps.checkout', 'apps.search'])
 
@@ -123,7 +126,9 @@ DATABASES = {
 #Haystack search
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
+        'INCLUDE_SPELLING': True,
     },
 }
 
@@ -215,9 +220,12 @@ OSCAR_SHOP_TAGLINE = 'You Think, We Provide'
 OSCAR_ALLOW_ANON_REVIEWS = False
 OSCAR_ALLOW_ANON_CHECKOUT = False
 
+OSCAR_ACCOUNTS_REDIRECT_URL = 'customer:profile-update' #after registration redirect to edit
+
 OSCAR_DASHBOARD_NAVIGATION += [
     {
         'label': _('Store Manager'),
+        'icon': "icon-building",
         'children': [
             {
                 'label': _('Stores'),
@@ -226,12 +234,40 @@ OSCAR_DASHBOARD_NAVIGATION += [
          ],
     },
 ]
+
+# search filters
+OSCAR_SEARCH_FACETS = {
+    'fields': OrderedDict([
+        ('product_class', {'name': _('Type'), 'field': 'product_class'}),
+        ('rating', {'name': _('Rating'), 'field': 'rating'}),
+    ]),
+    'queries': OrderedDict([
+        
+    ]),
+}
+
+
+
+
 # Image folder destination
 from datetime import date
 today = date.today()
 today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
 path = 'images/products/'
 OSCAR_IMAGE_FOLDER = os.path.join(path, today_path)
+
+# email backends
+OSCAR_FROM_EMAIL = 'something@firepit.in' #to be changed
+OSCAR_STATIC_BASE_URL = 'firepit.in'
+NEWSLETTER_CONFIRM_EMAIL = False
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# admin settings
+
+AdminSite.site_header = 'FIREPIT administration'
+AdminSite.site_title = 'FIREPIT Site Admin'
+AdminSite.index_title = 'FIREPIT Administration'
 
 
 

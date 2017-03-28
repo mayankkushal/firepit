@@ -8,8 +8,8 @@
         </button>
         <ul class="nav dropdown-menu pull-right">
             <li>
-                <a href="">
-                    {% trans "Edit category" %}
+                <a href="{% url 'dashboard:store_update' pk=record.pk %}">
+                    {% trans "Edit store" %}
                 </a>
             </li>
             <li>

@@ -1,7 +1,10 @@
 from django import forms
-from oscar.apps.address.forms import AbstractAddressForm
+from oscar.apps.address.forms import UserAddressForm as CoreUserAddressForm
 
-class UserAddressForm(AbstractAddressForm):
-	exclude = ['country']
+class UserAddressForm(CoreUserAddressForm):
+	state = forms.CharField(
+			widget = forms.TextInput(attrs={'placeholder': 'Telangana'}),
+            disabled=True,
+            required = False
+        )
 
-from oscar.apps.address.forms import *

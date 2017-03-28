@@ -6,5 +6,6 @@ urlpatterns = [
 	url(r'catalogue/store/(?P<store_slug>[\w\-]+)', views.store, name='store'),
 	url(r'request_quote', views.request_quote, name='request_quote'),
 	url(r'decorate_space', views.decorate_space, name='decorate_space'),
-	url(r'thank_you', views.thank_you, name='thank_you')
+	url(r'thank_you', views.thank_you, name='thank_you'),
+	url(r'power_solution', views.power_solution, name='power_solution'),
 ]

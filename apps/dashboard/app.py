@@ -58,7 +58,8 @@ class DashboardApplication(BaseDashboardApplication):
             # store urls
             url(r'^store_list', views.store_list, name="store_list"),
             url(r'^store_add', views.store_add, name="store_add"),
-            url(r'^store_delete/(?P<pk>[\w\-]+)', views.store_delete, name="store_delete")
+            url(r'^store_delete/(?P<pk>[\w\-]+)', views.store_delete, name="store_delete"),
+            url(r'^store_update/(?P<pk>[\w\-]+)', views.store_update, name="store_update")
 
 
         ]

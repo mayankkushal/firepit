@@ -11,7 +11,7 @@ DashboardTable = get_class('dashboard.tables', 'DashboardTable')
 
 
 class StoreTable(DashboardTable):
-    name = LinkColumn('dashboard:store_add') #, args=[A('pk')]
+    name = LinkColumn('dashboard:store_update', args=[A('pk')]) #, args=[A('pk')]
     description = TemplateColumn(
         template_code='{{ record.description|default:""|striptags'
                       '|cut:"&nbsp;"|truncatewords:6 }}')

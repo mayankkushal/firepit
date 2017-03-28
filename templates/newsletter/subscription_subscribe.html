@@ -1,0 +1,49 @@
+{% load i18n %}
+<div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsletter-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h1 class="modal-title" id="newsletter-modal">{% trans "Newsletter " %} {{ newsletter.title }}</h1>
+    </div>
+    <div class="modal-body">
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user }}!</p>
+
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        {% trans "Do you want to subscribe to this newsletter?" %}
+        <form enctype="multipart/form-data" method="post" action="{% url "newsletter_subscribe_confirm" newsletter_slug="new-newsletter" %}">
+            {% csrf_token %}
+            <p><input id="id_submit" name="submit" value="{% trans "Subscribe" %}" type="submit" class="btn btn-primary"/></p>
+        </form>
+        {% endif %}
+    {% else %}
+    {% if error %}
+        <p>{% trans "Due to a technical error we were not able to submit your confirmation email. This could be because your email address is invalid." %}</p>
+
+        {% comment %} Replace the the following dummy with a valid email address and remove this comment.
+
+        <p>{% trans "If the error persists, please don't hesitate to contact us at the following email address:" %} <a href="mailto:info@foobar.com">info@foobar.com</a></p>
+
+        {% endcomment %}
+    {% else %}
+        <form enctype="multipart/form-data" method="post" action="/newsletter/new-newsletter/subscribe/">
+            {% csrf_token %}
+            <ul class="errorlist"><li>An e-mail address is required.</li></ul>
+            <label for="id_email_field">E-mail:</label>
+            <input id="id_email_field" maxlength="254" name="email_field" type="email">
+
+            <input id="id_submit" name="submit" value="{% trans "Subscribe" %}" type="submit" class="btn btn-primary" />
+        </form>
+    {% endif %}
+    </div>
+    {% endif %}
+    </div>
+</div>
+</div>
+ 

@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+	<div class="container quote-form">
+	<h1>Power Solutions for home or office</h1>
+	<p> Calculate your power requirements with the below form and choose the optimal power solution. We use Exide, SF Sonic, Amaron & Exceed Batteries along with Microtek, Amaron & Luminous Inverters. We offer customized power solutions to all your home, office or industry requirements. Please provide your contact details along with any specific information regarding your home or office construction. We will contact you with the best quote for an optimal power solution.
+	</p>
+	<form id="post_form" method="post" action=""
+	<form>
+		{% csrf_token %}
+		{% for hidden in sol_form.hidden_fields %}
+        {{ hidden }}
+    	{% endfor %}
+		<div class="form-group">
+		<input type="hidden" name="csrfmiddlewaretoken" value="KDvpxl5Gd44lWAfPfbzxdM5gWW3icWSdQZMiCwcJt3SWTnSsqGXrLCno16Tt7j7k">
+		<input id="id_name" class="form-control" maxlength="156" name="name" type="text" required autofocus placeholder="Name" /> <br />
+    
+        <input id="id_email" class="form-control" maxlength="256" name="email" type="email" required placeholder="Email" /> <br />
+        <input id="id_address" class="form-control" maxlength="500" name="address" type="text" required placeholder="Address" /> <br />
+    
+        <input id="id_phone_number" class="form-control" maxlength="12" name="phone_number" type="text" required placeholder="Phone Number" /> <br />
+    
+        <textarea cols="40" id="id_message" class="form-control" maxlength="1256" name="message" rows="10" placeholder="Your Messsage"></textarea> <br />
+        <h3>Enter your requirements, so we can provide you better.</h3>
+        <div class="pow-sol-input">
+		<label for="id_small_light">Number of lights (CFL/LED)</label> <input id="id_small_light" class="form-control" min="0" name="small_light" type="number" placeholder="0">
+		<br />
+		<label for="id_big_light">Number of tubelights</label> <input id="id_big_light" class="form-control" min="0" name="big_light" type="number" placeholder="0">
+		<br />
+		<label for="id_fan">Number of fans</label> <input id="id_fan" min="0" name="fan" class="form-control" type="number" required="" placeholder="0"><br />
+		<label for="id_desktop">Number of TV/Desktop</label> <input id="id_desktop" class="form-control" min="0" name="desktop" type="number"  placeholder="0"><br />
+		</div>
+		</div>
+		<hr>
+    <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-info" />
+	</form>
+	</div>
+{% endblock %}

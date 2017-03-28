@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import SlideShowImage, Banner, RequestQuote, RequestQuoteImage, DecorateSpaceImage, DecorateSpace
 from apps.catalogue.models import Product, Store
-from .forms import RequestQuoteForm, RequestQuoteImageForm, DecorateSpaceForm, DecorateSpaceImageForm
+from .forms import RequestQuoteForm, RequestQuoteImageForm, DecorateSpaceForm, DecorateSpaceImageForm, PowerSolutionForm
 from django.forms import BaseModelFormSet
 from django.forms.models import modelformset_factory
 from oscar.apps.order.models import Order
@@ -53,6 +53,7 @@ def request_quote(request):
 				if image:
 					photo = RequestQuoteImage(quote=quote, image=image)
 					photo.save()
+			return render(request, 'firepit/success.html', {'total':total})
 		else:
 			print(quote_form.errors, formste.errors)
 	else:
@@ -105,6 +106,7 @@ def decorate_space(request):
 				if image:
 					photo = DecorateSpaceImage(space=space, image=image)
 					photo.save()
+			return render(request, 'firepit/success.html', {'total':total})
 		else:
 			print(space_form.errors, formset.errors)
 	else:
@@ -112,3 +114,15 @@ def decorate_space(request):
 		formset = ImageFormSet(queryset=DecorateSpaceImage.objects.none())
 	return render(request, 'firepit/decorate_space.html',{'space_form':space_form, 'formset':formset})
 	
+def power_solution(request):
+	total = 0
+	if request.method == "POST":
+		sol_form = PowerSolutionForm(request.POST)
+		if sol_form.is_valid():
+			sol = sol_form.save()
+			total = sol.power_total()
+			category = sol.invertor_category(total)
+			return render(request, 'firepit/success.html', {'total':total, 'category':category})
+	else:
+		sol_form = PowerSolutionForm()
+		return render(request, 'firepit/power_solution.html', {'sol_form':sol_form}) 

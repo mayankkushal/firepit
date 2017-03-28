@@ -8,7 +8,7 @@ Use message tags to control these alerts.  Available tags include:
 - error/success/info - these change the connotation of the alert
 {% endcomment %}
 
-<div id="messages">
+<div id="messages" class="msg-modal modal-content">
 {% if messages %}
     {% for message in messages %}
     <div class="alert {% for tag in message.tags|split %}alert-{% if tag == 'error' %}danger{% else %}{{ tag }}{% endif %} {% endfor %} fade in">
@@ -37,4 +37,5 @@ Use message tags to control these alerts.  Available tags include:
         </div>
     {% endfor %}
 {% endif %}
+
 </div>

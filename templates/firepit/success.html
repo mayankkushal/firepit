@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container fix-height">
+	{% if total and category %}
+	<h1>Your expected power consumption is {{ total }}</h1>
+	<h3>We suggest you to use
+	{% if category == 1%}
+	700VA inverter and 100ah battery.
+	{% elif category == 2 %}
+	880VA, 900 VA or 950VA inverter with either 100ah or 150ah battery.
+	{% elif category == 3 %}
+	1100VA inverter with either 150ah or 180ah battery.
+	{% elif category == 4 %}
+	1500VA inverter with 2 batteries each of 100ah or 150ah.
+	{% endif %}
+	</h3>
+	<h2>Thank you. We will contact you within 3 days with the best quotation.</h2>
+	{% else %}
+	<h2>Thank you. We will contact you within 3 days with the best quotation.</h2>
+	{% endif %}
+	<hr>
+	<hr>
+	<a href="{% url 'index' %}" class="btn btn-lg btn-success">Look at our wide range of products</a>
+</div>
+{% endblock %}

@@ -1,3 +1,15 @@
+.fix-height{
+  height: 65vh;
+}
+.pow-sol-input{
+  width: 50%;
+}
+.msg-modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+}
 .hidden{
   visibility: hidden;
 }
@@ -1202,10 +1214,11 @@ h1 {
 }
 .navbar-brand {
   float: left;
-  padding: 10px 15px;
+  padding: 10px 0px;
   font-size: 18px;
   line-height: 20px;
   height: 70px;
+  width: 225px;
   background-color: #00BBD3;
 }
 .navbar-brand:hover,
@@ -1311,6 +1324,7 @@ h1 {
 .navbar-default {
   background-color: #ffffff;
   border-bottom-color: #e6e6e6;
+  padding-bottom: 20px !important;
 }
 .navbar-default .navbar-brand {
   color: #777777;
@@ -1633,7 +1647,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: 'Dosis', sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -1646,6 +1660,9 @@ h3,
 .h3 {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+p{
+  font-family: 'Slabo 27px', serif;
 }
 p,
 ul,
@@ -1736,9 +1753,10 @@ address {
   text-decoration: none;
 }
 .cat-img{
+  padding:1px;
+  border:1px solid #021a40;
   width: 75%;
   height: 200px;
   border-radius: 5px;
   margin: auto;
-
 }

@@ -100,9 +100,10 @@
     {% endblock %}
 
     {% block product_info %}
-    <div class="sub-header">
-        <h2>{% trans "Product Information" %}</h2>
+    <div class="sub-header" id="pro-info-header">
+        <h2>{% trans "Product Information" %} <button class="btn btn-xs"><i id="toggle-arrow", class="fa fa-caret-up"></i></button></h2>
     </div>
+    <div id="product-info" style="display: none;">
     <table class="table table-striped">
         {% if product.upc %}
         <tr>
@@ -144,6 +145,7 @@
             </tr>
         {% endiffeature %}
     </table>
+    </div>
     {% endblock %}
 
     {% iffeature "reviews" %}
@@ -189,10 +191,12 @@
                 <h2>{% trans "Recommended items" %}</h2>
             </div>
             <ul class="row">
-                {% for product in recommended_products %}
+                {% for products in recommended_products %}
+                {% ifnotequal products.name product.name %}
                 <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    {% render_product product %}
+                    {% render_product products %}
                 </li>
+                {% endifnotequal %}
                 {% endfor %}
             </ul>
         {% endif %}

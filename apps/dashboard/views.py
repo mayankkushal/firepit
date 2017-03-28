@@ -26,7 +26,16 @@ def store_delete(request, pk):
 	if request.method == 'POST':
 		store = Store.objects.get(pk=pk)
 		store.delete()
-		return redirect('/dashboard/store_list')
+		return redirect('/dashboard/store_list') 
 	else:
 		store = Store.objects.get(pk=pk)
 		return render(request, 'dashboard/store_delete.html', {'store':store})
+
+def store_update(request, pk):
+	instance = Store.objects.get(pk=pk)
+	store_form = StoreForm(request.POST or None, instance=instance)
+	if store_form.is_valid():
+		store_form.save()
+		return redirect('/dashboard/store_list')
+	else:
+		return render(request, 'dashboard/store_update.html', {'store_form':store_form, 'store':instance})

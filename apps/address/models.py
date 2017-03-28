@@ -9,7 +9,7 @@ class UserAddress(AbstractUserAddress):
         on_delete=models.CASCADE,
         verbose_name=_("Country"),
         default='India')
+	state = models.CharField(_("State"), max_length=255, blank=True, default='Telangana', null=True)
 		
-
 
 from oscar.apps.address.models import *  # noqa

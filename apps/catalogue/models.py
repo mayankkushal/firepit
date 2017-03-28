@@ -5,6 +5,7 @@ from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProduc
 import cloudinary
 import os
 from django.conf import settings
+from django.urls import reverse
 from datetime import date, datetime
 
 class Store(models.Model):
@@ -13,6 +14,9 @@ class Store(models.Model):
 	image = models.ImageField(_('Image'), upload_to='stores', blank=True, null=True, max_length=255)
 	slug = models.SlugField(_('Slug'), max_length=255, db_index=True)
 	views = models.PositiveIntegerField(_('Views'))
+
+	def get_absolute_url(self):
+		return '/catalogue/store/%s'% self.slug
 
 	def save(self, *args, **kwargs):
 		if not self.id:

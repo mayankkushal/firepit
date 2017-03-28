@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+
+{% load i18n %}
+
+{% block title %}{% trans "Newsletter" %} {{ newsletter.title }} {{ action }} {% trans "activate" %}{% endblock title %}
+
+{% block content_wrapper %}
+<div class="container">
+    <h1>{% trans "Newsletter: " %} {{ newsletter.title }}</h1>
+
+    <p>{% trans "Your subscription has successfully been activated." %}</p>
+</div>
+{% endblock %}

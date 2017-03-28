@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'', include(application.urls)),
     url(r'^', include('firepit.urls')),
     url('', include('social_django.urls', namespace='social')),
-    url(r'^blog/', include('blog.urls'))
+    url(r'^blog/', include('blog.urls')),
+    url(r'^newsletter/', include('newsletter.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

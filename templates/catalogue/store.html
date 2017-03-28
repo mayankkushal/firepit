@@ -84,9 +84,6 @@
                 </div>
             {% endif %}
         {% else %}
-            <p>
-                <strong>{{ count }}</strong> results.
-            </p>
         {% endif %}
     </form>
 
@@ -95,7 +92,9 @@
             <div>
                 <ol class="row">
                     {% for product in product_list %}
+                    {% if product.is_standalone or product.is_parent %}
                         <li class="col-xs-6 col-sm-4 col-md-3 col-lg-3">{% render_product product %}</li>
+                    {% endif %}
                     {% endfor %}
                 </ol>
                 {% include "partials/pagination.html" %}
